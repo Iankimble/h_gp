@@ -32,6 +32,16 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/", contactRoute);
 app.use("/", eventRoute);
+app.use(express.static(path.join(__dirname, "./client/build")));
+
+// React front end
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+app.get("*", (request, response) => {
+  response.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
 
 // Mongo Atlas DB
 mongoose
@@ -49,12 +59,4 @@ mongoose
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port: ${port}`);
-});
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
-
-app.get("*", (request, response) => {
-  response.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
