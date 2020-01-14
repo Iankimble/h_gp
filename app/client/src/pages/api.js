@@ -1,15 +1,12 @@
 export const allEvents = (page, limit) => {
-  return fetch(
-    `${process.env.REACT_APP_API_URL}/all?page=${page}&limit=${limit}`,
-    {
-      method: "GET",
-      // mode: "cors",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
+  return fetch(`http://localhost:5000/all?page=${page}&limit=${limit}`, {
+    method: "GET",
+    // mode: "cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
     }
-  )
+  })
     .then(response => {
       return response.json();
     })
