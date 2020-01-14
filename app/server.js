@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
+const proxy = require("http-proxy-middleware");
+
 dotenv.config();
 
 const app = express();
@@ -20,7 +22,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/", contactRoute);
 app.use("/", eventRoute);
-// app.use(express.static(path.join(__dirname, "./client/build")));
+// app.use({ target: "http://localhost:5000", changeOrigin: true });
+app.use(express.static(path.join(__dirname, "./client/build")));
 
 // Mongo Atlas DB
 mongoose
