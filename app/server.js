@@ -11,6 +11,15 @@ const proxy = require("http-proxy-middleware");
 dotenv.config();
 
 const app = express();
+app.use(express.static(path.join(__dirname, "client", "build")));
+// React front end
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+app.get("*", (request, response) => {
+  response.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 //Routes
 const contactRoute = require("./routes/contact-route");
@@ -22,8 +31,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/", contactRoute);
 app.use("/", eventRoute);
-// app.use({ target: "http://localhost:5000", changeOrigin: true });
-app.use(express.static(path.join(__dirname, "client", "build")));
 
 // Mongo Atlas DB
 mongoose
@@ -36,15 +43,6 @@ mongoose
     console.log(`db connection error : ${err.message}`);
     process.exit();
   });
-
-// React front end
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
-
-app.get("*", (request, response) => {
-  response.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
 
 // Port
 const port = process.env.PORT || 5000;
