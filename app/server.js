@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const path = require("path");
 dotenv.config();
 
 const app = express();
@@ -40,7 +41,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.get("*", (request, response) => {
-  response.sendFile(path.join(__dirname, "client/build", "/"));
+  response.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 // Mongo Atlas DB
