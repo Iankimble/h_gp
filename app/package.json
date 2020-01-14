@@ -19,6 +19,7 @@
     "@sendgrid/client": "^6.4.0",
     "@sendgrid/mail": "^6.4.0",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.0.2",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
