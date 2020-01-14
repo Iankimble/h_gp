@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use("/", contactRoute);
 app.use("/", eventRoute);
 // app.use({ target: "http://localhost:5000", changeOrigin: true });
-app.use(express.static(path.join(__dirname, "./client/build")));
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 // Mongo Atlas DB
 mongoose
