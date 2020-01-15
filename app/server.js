@@ -11,15 +11,16 @@ const path = require("path");
 dotenv.config();
 
 const app = express();
-app.use(express.static(path.join(__dirname, "client", "build")));
-// React front end
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
 
-app.get("*", (request, response) => {
-  response.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+// React front end
+// app.use(express.static(path.join(__dirname, "client", "build")));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+// }
+
+// app.get("*", (request, response) => {
+//   response.sendFile(path.join(__dirname, "client", "build", "index.html"));
+// });
 
 //Routes
 const contactRoute = require("./routes/contact-route");
