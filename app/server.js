@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
 // const proxy = require("http-proxy-middleware");
+const herokuProxy = require("heroku-proxy");
 
 dotenv.config();
 
@@ -32,6 +33,16 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/", contactRoute);
 app.use("/", eventRoute);
+
+// Heroku proxy
+app.use(
+  herokuProxy({
+    hostname: "localhost",
+    port: "5000",
+    prefix: "heroku-api",
+    portocol: "http"
+  })
+);
 
 // Mongo Atlas DB
 mongoose
