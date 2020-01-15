@@ -9,7 +9,7 @@ const {
 
 const router = express.Router();
 
-router.get("/api/all", eventsPagination);
+router.get("/all", eventsPagination);
 
 router.get("/events", allEvents);
 
