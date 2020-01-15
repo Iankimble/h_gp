@@ -1,6 +1,6 @@
 export const allEvents = (page, limit) => {
   return fetch(
-    `https://greenprint.herokuapp.com/events/all?page=${page}&limit=${limit}`,
+    `${process.env.REACT_APP_API_URL}/all?page=${page}&limit=${limit}`,
     {
       method: "GET",
       headers: {
