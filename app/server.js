@@ -29,8 +29,8 @@ const eventRoute = require("./routes/event-route");
 app.use(morgan("dev"));
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/", contactRoute);
-app.use("/", eventRoute);
+app.use("/api/", contactRoute);
+app.use("/api/", eventRoute);
 
 // Mongo Atlas DB
 mongoose
