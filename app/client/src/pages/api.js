@@ -3,7 +3,6 @@ export const allEvents = (page, limit) => {
     `${process.env.REACT_APP_API_URL}/all?page=${page}&limit=${limit}`,
     {
       method: "GET",
-      // mode: "cors",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
