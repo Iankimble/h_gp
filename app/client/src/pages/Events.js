@@ -16,7 +16,8 @@ class Events extends Component {
     this.state = {
       events: [],
       page: 1,
-      limit: 2
+      limit: 2,
+      dataToDisplay: true
     };
   }
 
@@ -26,6 +27,7 @@ class Events extends Component {
     allEvents(page, limit).then(data => {
       if (data.error) {
         console.log("error");
+        this.setState({ dataToDisplay: false });
       } else {
         this.setState({ events: data });
       }
@@ -50,6 +52,10 @@ class Events extends Component {
     this.getEvents(this.state.page);
     console.log(this.state.page);
   }
+
+  retrunNa = events => {
+    return <div>no data to display</div>;
+  };
 
   renderEvents = events => {
     return (
@@ -107,54 +113,62 @@ class Events extends Component {
 
   render() {
     const { events } = this.state;
-    return (
-      <div>
-        <h1
-          style={{
-            textAlign: "center",
-            fontSize: "40px",
-            fontFamily: "Gelasio",
-            marginTop: "15px"
-          }}
-        >
-          Events
-        </h1>
-        <hr />
-        {this.renderEvents(events)}
-        <div
-          style={{
-            alignContent: "center",
-            textAlign: "center",
-            justifyContent: "center"
-          }}
-        >
-          <Button
-            size="lg"
+    if (this.state.dataToDisplay === false) {
+      return <div> no data to display</div>;
+    } else
+      return (
+        <div>
+          <h1
             style={{
-              width: "200px",
-              margin: "5px",
-              backgroundColor: "#7022c3",
-              border: "none"
+              textAlign: "center",
+              fontSize: "40px",
+              fontFamily: "Gelasio",
+              marginTop: "15px"
             }}
-            onClick={this.loadPrev}
           >
-            Prev
-          </Button>
-          <Button
-            size="lg"
+            Events
+          </h1>
+          <hr />
+
+          {/**-------------------------------------------- */}
+
+          {/**-------------------------------------------- */}
+
+          {this.renderEvents(events)}
+          <div
             style={{
-              width: "200px",
-              margin: "5px",
-              backgroundColor: "#7022c3",
-              border: "none"
+              alignContent: "center",
+              textAlign: "center",
+              justifyContent: "center"
             }}
-            onClick={(this, this.loadNext)}
           >
-            Next
-          </Button>
+            <Button
+              size="lg"
+              style={{
+                width: "200px",
+                margin: "5px",
+                backgroundColor: "#7022c3",
+                border: "none"
+              }}
+              onClick={this.loadPrev}
+            >
+              Prev
+            </Button>
+            <Button
+              size="lg"
+              style={{
+                width: "200px",
+                margin: "5px",
+                backgroundColor: "#7022c3",
+                border: "none"
+              }}
+              onClick={(this, this.loadNext)}
+            >
+              Next
+            </Button>
+          </div>
         </div>
-      </div>
-    );
+      );
   }
 }
 export default Events;
