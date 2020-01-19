@@ -111,8 +111,7 @@ class Events extends Component {
     if (this.state.noDataDisplay === true) {
       return (
         <div>
-          {" "}
-          <h2
+          <h1
             style={{
               textAlign: "center",
               fontSize: "40px",
@@ -120,7 +119,18 @@ class Events extends Component {
               marginTop: "15px"
             }}
           >
-            Sorry, no data to display at this time.
+            Events
+          </h1>
+          <hr />{" "}
+          <h2
+            style={{
+              textAlign: "center",
+              fontSize: "14px",
+              fontFamily: "Gelasio",
+              marginTop: "15px"
+            }}
+          >
+            Sorry, no events to display at this time.
           </h2>
         </div>
       );

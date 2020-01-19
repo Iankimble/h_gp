@@ -13,7 +13,8 @@ class Contact extends Component {
       from: "",
       subject: "",
       text: "",
-      error: ""
+      error: "",
+      confirmSent: false
     };
   }
 
@@ -42,6 +43,7 @@ class Contact extends Component {
           text: ""
         });
     });
+    this.setState({ confirmSent: true });
   };
 
   contactForm = (name, from, subject, text) => (
@@ -164,7 +166,30 @@ class Contact extends Component {
 
   render() {
     const { name, from, subject, text } = this.state;
-    return <div>{this.contactForm(name, from, subject, text)}</div>;
+    if (this.state.confirmSent === false) {
+      return <div>{this.contactForm(name, from, subject, text)}</div>;
+    } else if (this.state.confirmSent === true) {
+      return (
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "40px",
+            fontFamily: "Gelasio",
+            marginTop: "15px"
+          }}
+        >
+          <h2>Mesaage sent!</h2>
+          <hr />
+          <p
+            style={{
+              fontSize: "14px"
+            }}
+          >
+            Thank you for your message. We'll be in touch very soon!
+          </p>
+        </div>
+      );
+    }
   }
 }
 
