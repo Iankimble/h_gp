@@ -17,7 +17,7 @@ class Events extends Component {
       events: [],
       page: 1,
       limit: 2,
-      dataToDisplay: true
+      noDataDisplay: true
     };
   }
 
@@ -27,9 +27,8 @@ class Events extends Component {
     allEvents(page, limit).then(data => {
       if (data.error) {
         console.log("error");
-        this.setState({ dataToDisplay: false });
       } else {
-        this.setState({ events: data });
+        this.setState({ events: data, noDataDisplay: false });
       }
       console.log(this.state.events);
     });
@@ -52,10 +51,6 @@ class Events extends Component {
     this.getEvents(this.state.page);
     console.log(this.state.page);
   }
-
-  retrunNa = events => {
-    return <div>no data to display</div>;
-  };
 
   renderEvents = events => {
     return (
@@ -113,9 +108,23 @@ class Events extends Component {
 
   render() {
     const { events } = this.state;
-    if (this.state.dataToDisplay === false) {
-      return <div> no data to display</div>;
-    } else
+    if (this.state.noDataDisplay === true) {
+      return (
+        <div>
+          {" "}
+          <h2
+            style={{
+              textAlign: "center",
+              fontSize: "40px",
+              fontFamily: "Gelasio",
+              marginTop: "15px"
+            }}
+          >
+            Sorry, no data to display at this time.
+          </h2>
+        </div>
+      );
+    } else if (this.state.noDataDisplay === false) {
       return (
         <div>
           <h1
@@ -129,10 +138,6 @@ class Events extends Component {
             Events
           </h1>
           <hr />
-
-          {/**-------------------------------------------- */}
-
-          {/**-------------------------------------------- */}
 
           {this.renderEvents(events)}
           <div
@@ -169,6 +174,7 @@ class Events extends Component {
           </div>
         </div>
       );
+    }
   }
 }
 export default Events;
