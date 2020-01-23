@@ -1,14 +1,11 @@
 export const allEvents = (page, limit) => {
-  return fetch(
-    `${process.env.REACT_APP_API_URL}/all?page=${page}&limit=${limit}`,
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
+  return fetch(`https://greenprint.herokuapp.com/events`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
     }
-  )
+  })
     .then(response => {
       return response.json();
     })
