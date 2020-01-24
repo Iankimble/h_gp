@@ -13,7 +13,7 @@ export const allEvents = (page, limit) => {
 };
 
 export const sendMsg = msg => {
-  return fetch(`https://greenprint.herokuapp.com/contact`, {
+  return fetch(`https://greenprint.herokuapp.com/sendMsg`, {
     method: "POST",
     headers: {
       Accept: "application/json",
